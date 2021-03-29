@@ -7,15 +7,56 @@
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:local="clr-namespace:WpfSMSApp.View"
     mc:Ignorable="d"
-    Title="Login" Height="200" Width="400">
+    Title="Login" Height="300" Width="500" 
+    ShowCloseButton="False" 
+    ShowMaxRestoreButton="False" 
+    ShowMinButton="False" 
+    ResizeMode="NoResize"
+    Loaded="MetroWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="2" Content="로그인" Margin="5" Width="100" Background="Blue" Foreground="White" />
+        <TextBox x:Name="TxtUserEmail" Grid.Row="1" Margin="10" FontSize="16"
+                 mah:TextBoxHelper.Watermark="User E-mail" KeyDown="TxtUserEmail_KeyDown"/>
+        <PasswordBox x:Name="TxtPassword" Grid.Row="2" Margin="10" FontSize="16"
+                 mah:TextBoxHelper.Watermark="Password" KeyDown="TxtPassword_KeyDown"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="BtnLogin" Content="로그인" Margin="5" 
+                    Width="150" Height="40" FontSize="16" 
+                    Background="RoyalBlue" Foreground="White" Click="BtnLogin_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="5, 0" VerticalAlignment="Center" />
+                            <Image Source="/Resources/unlock.png" Width="27" Height="27"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button x:Name="BtnCancel" Content="취소" Margin="5" 
+                    Width="150" Height="40" FontSize="16" 
+                    Background="AliceBlue" Foreground="DarkSlateBlue" Click="BtnCancel_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
+                            <Image Source="/Resources/bansign.png" Width="27" Height="27"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+
+        <Label x:Name="LblResult" Content="Result" Grid.Row="4"
+                VerticalAlignment="Center" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="16" Foreground="OrangeRed"/>
+
     </Grid>
 </mah:MetroWindow>
