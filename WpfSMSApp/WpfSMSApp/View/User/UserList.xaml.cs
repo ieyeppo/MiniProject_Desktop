@@ -46,7 +46,7 @@ namespace WpfSMSApp.View.User
 
         }
 
-        private void Btn_Click(object sender, RoutedEventArgs e)
+        private void BtnExportPdf_Click(object sender, RoutedEventArgs e)
         {
 
         }
