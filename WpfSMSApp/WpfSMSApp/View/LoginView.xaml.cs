@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
 
@@ -65,6 +66,10 @@ namespace WpfSMSApp.View
             {
                 var email = TxtUserEmail.Text;
                 var password = TxtPassword.Password;
+
+                var mdHash = MD5.Create();//Commons.SYS_HASH
+                password = Commons.GetMd5Hash(mdHash, password);
+
                 var isOurUser = Logic.DataAccess.GetUsers()
                     .Where(u => u.UserEmail.Equals(email) && u.UserPassword.Equals(password) 
                              && u.UserActivated == true).Count();

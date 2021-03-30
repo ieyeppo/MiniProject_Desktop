@@ -45,25 +45,11 @@
         </Grid.ColumnDefinitions>
 
         <!-- 제목입력 시작 -->
-        <Label Content="계정정보" Grid.Row="0" Grid.Column="1"
-               FontWeight="ExtraBold" FontSize="25" 
-               HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <!-- 제목입력 끝 -->
-
-        <!-- 버튼영역 시작 -->
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
-            <Button x:Name="BtnEditMyAccount" Content="계정정보 수정" Grid.Column="1" Margin="5, 10"
-                    Background="DarkSlateBlue" Foreground="White" Click="BtnEditMyAccount_Click">
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
-                            <iconPacks:PackIconVaadinIcons Kind="Stock" Width="24" Height="24" />
-                        </StackPanel>
-                    </DataTemplate>
-                </Button.ContentTemplate>
-            </Button>
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Image Source="/Resources/user2.png" Width="40" Height="40"/>
+            <Label Content="계정정보" FontWeight="ExtraBold" FontSize="25" Width="200"/>
         </StackPanel>
+        <!-- 제목입력 끝 -->
                 
         <!-- 버튼영역 끝 -->
 
@@ -99,8 +85,24 @@
             <TextBlock x:Name="TxtUserEmail" Text="TxtUserEmail" Grid.Row="4" Grid.Column="1"/>
             <TextBlock x:Name="TxtUserAdmin" Text="TxtUserAdmin" Grid.Row="5" Grid.Column="1"/>
             <TextBlock x:Name="TxtUserActivated" Text="TxtUserActivated" Grid.Row="6" Grid.Column="1"/>
-            <TextBlock x:Name="Txt" Text="text" Grid.Row="7" Grid.Column="1"/>
         </Grid>
         <!-- 컨텐츠영역 끝 -->
+
+        <!-- 버튼영역 시작 -->
+
+        <Button x:Name="BtnEditMyAccount" Content="계정정보수정" Margin="5, 10" Grid.Row="1" Grid.Column="2" 
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Background="RoyalBlue" Foreground="White" Click="BtnEditMyAccount_Click" Width="200">
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
+                        <iconPacks:PackIconFontAwesome Kind="UserEditSolid" Width="40" Height="40" />
+                    </StackPanel>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
+
+        <!-- 버튼영역 끝 -->
     </Grid>
 </Page>
