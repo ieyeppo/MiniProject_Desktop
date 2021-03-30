@@ -75,25 +75,25 @@
 
         <!-- 버튼영역 시작 -->
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button x:Name="BtnAddUser" Content="사용자 추가" 
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="3, 0">
+            <Button x:Name="BtnAddUser" Content="사 용 자   추 가" 
                     Background="RoyalBlue" Foreground="White" Click="BtnAddUser_Click" Margin="0,10">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
-                            <iconPacks:PackIconMaterial Kind="AccountPlus" Width="40" Height="40" />
+                            <iconPacks:PackIconMaterial Kind="AccountPlus" Width="30" Height="30" />
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button x:Name="BtnEditUser" Content="사용자 수정" 
+            <Button x:Name="BtnEditUser" Content="사 용 자   수 정" 
                     Background="RoyalBlue" Foreground="White" Click="BtnEditUser_Click" Margin="0,10">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
-                            <iconPacks:PackIconFontAwesome Kind="UserEditSolid" Width="40" Height="40" />
+                            <iconPacks:PackIconFontAwesome Kind="UserEditSolid" Width="30" Height="30" />
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
@@ -104,18 +104,18 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
-                            <Image Source="/Resources/user.png" Width="40" Height="40" />
+                            <Image Source="/Resources/user.png" Width="30" Height="30" />
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button x:Name="BtnDeactivateuser" Content="PDF 익스포트" 
+            <Button x:Name="BtnDeactivateuser" Content="PDF  익 스 포 트" 
                     Background="DarkBlue" Foreground="White" Click="BtnDeactivateuser_Click" Margin="0,10">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding}" Margin="20, 0" VerticalAlignment="Center" />
-                            <iconPacks:PackIconCodicons Kind="FilePdf" Width="40" Height="40" />
+                            <iconPacks:PackIconCodicons Kind="FilePdf" Width="30" Height="30" />
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
