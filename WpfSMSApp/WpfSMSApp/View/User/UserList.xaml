@@ -23,7 +23,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="10, 0"/>
         </Style>
-        
+
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -51,8 +51,6 @@
             <Label Content="사용자정보" FontWeight="ExtraBold" FontSize="25" Width="200"/>
         </StackPanel>
         <!-- 제목입력 끝 -->
-                
-        <!-- 버튼영역 끝 -->
 
         <!-- 컨텐츠영역 시작 -->
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
@@ -62,13 +60,23 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <RadioButton Content="모두"  Margin="20,0"/>
-                <RadioButton Content="활성"  Margin="20,0"/>
-                <RadioButton Content="비활성"  Margin="20,0"/>
+                <RadioButton x:Name="RdoAll" Content="모두"  Margin="20,0" Checked="RdoAll_Checked"/>
+                <RadioButton x:Name="RdoActive" Content="활성"  Margin="20,0" Checked="RdoActive_Checked"/>
+                <RadioButton x:Name="RdoDeactive" Content="비활성"  Margin="20,0" Checked="RdoDeactive_Checked"/>
             </StackPanel>
             
-            <DataGrid x:Name="GrdData" Grid.Row="1">
-                
+            <DataGrid x:Name="GrdData" Grid.Row="1" AutoGenerateColumns="False" SelectionUnit="FullRow" 
+                      Style="{StaticResource MahApps.Styles.DataGrid.Azure}" GridLinesVisibility="Vertical"
+                      ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="UserID" Binding="{Binding UserID}" Header="순번" Width="60" IsReadOnly="true"/>
+                    <DataGridTextColumn Binding="{Binding UserIdentityNumber}" Header="사번" Width="*" IsReadOnly="true"/>
+                    <DataGridTextColumn Binding="{Binding UserSurname}" Header="성" Width="*" IsReadOnly="true"/>
+                    <DataGridTextColumn Binding="{Binding UserName}" Header="이름" Width="*" IsReadOnly="true"/>
+                    <DataGridTextColumn Binding="{Binding UserEmail}" Header="이메일" Width="2*" IsReadOnly="true"/>
+                    <DataGridTextColumn Binding="{Binding UserAdmin}" Header="관리자여부" Width="85" IsReadOnly="true"/>
+                    <DataGridTextColumn Binding="{Binding UserActivated}" Header="활성여부" Width="85" IsReadOnly="true"/>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <!-- 컨텐츠영역 끝 -->
@@ -123,5 +131,6 @@
         </StackPanel>
 
         <!-- 버튼영역 끝 -->
+        
     </Grid>
 </Page>

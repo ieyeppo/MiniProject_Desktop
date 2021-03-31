@@ -1,6 +1,11 @@
-﻿using NLog;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using NLog;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
 using WpfSMSApp.Model;
 
 namespace WpfSMSApp
@@ -25,6 +30,28 @@ namespace WpfSMSApp
             }
 
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// 이메일 정규식 확인
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        internal static bool IsValidEmail(string email)
+        {
+            return Regex.IsMatch(email, @"[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"); ;
+        }
+
+        /// <summary>
+        /// MetroMessageBox 공통메서드
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        public static async Task<MessageDialogResult> ShowMessageAsync(string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
+        {
+            return await ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(title, message, style, null);
         }
     }
 }

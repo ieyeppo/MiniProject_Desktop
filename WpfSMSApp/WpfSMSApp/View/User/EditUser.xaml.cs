@@ -6,21 +6,24 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using MahApps.Metro.Controls.Dialogs;
 
-namespace WpfSMSApp.View.Account
+namespace WpfSMSApp.View.User
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class EditAccount : Page
+    public partial class EditUser : Page
     {
-        public EditAccount()
+        public EditUser()
         {
             InitializeComponent();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            LoadData();
+
             try
             {
                 LblUserIdentityNumber.Visibility = LblUserSurname.Visibility =
@@ -38,21 +41,6 @@ namespace WpfSMSApp.View.Account
                 CboUserAdmin.ItemsSource = comboValues;
                 CboUserActivated.ItemsSource = comboValues;
 
-
-
-                var user = Commons.LOGINED_USER;
-                TxtUserID.Text = user.UserID.ToString();
-                TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserSurname.Text = user.UserSurname.ToString();
-                TxtUserName.Text = user.UserName.ToString();
-                TxtUserEmail.Text = user.UserEmail.ToString();
-                //TxtUserPassword.Password = user.UserPassword;
-                CboUserAdmin.SelectedIndex = user.UserAdmin == false ? 0 : 1;
-                CboUserActivated.SelectedIndex = user.UserActivated == false ? 0 : 1;
-
-
-                //TxtUserAdmin.Text = user.UserAdmin.ToString();
-                //TxtUserActivated.Text = user.UserActivated.ToString();
             }
             catch (Exception ex)
             {
@@ -75,7 +63,7 @@ namespace WpfSMSApp.View.Account
                    = LblUserPassword.Visibility = LblUserAdmin.Visibility
                    = LblUserActivated.Visibility = Visibility.Hidden;
 
-            var user = Commons.LOGINED_USER;
+            var user = GrdData.SelectedItem as Model.User;
 
             if (string.IsNullOrEmpty(TxtUserSurname.Text))
             {
@@ -100,12 +88,6 @@ namespace WpfSMSApp.View.Account
             {
                 LblUserEmail.Visibility = Visibility.Visible;
                 LblUserEmail.Text = "이메일 형식이 올바르지 않습니다.";
-                isValid = false;
-            }
-            else if (!EmailCheck(TxtUserEmail.Text))
-            {
-                LblUserEmail.Visibility = Visibility.Visible;
-                LblUserEmail.Text = "중복된 이메일 입니다..";
                 isValid = false;
             }
             if (string.IsNullOrEmpty(TxtUserPassword.Password))
@@ -147,21 +129,47 @@ namespace WpfSMSApp.View.Account
 
                     if(result == 0)
                     {
-                        LblResult.Text = "계정 수정에 수정에 문제가 발생했습니다. 관리자에게 문의 바랍니다.";
+                        LblResult.Text = "사용자정보 수정에 수정에 문제가 발생했습니다. 관리자에게 문의 바랍니다.";
                         LblResult.Foreground = Brushes.Red;
                     }
                     else
                     {
-                        LblResult.Text = "정상적으로 수정했습니다.";
+                        LblResult.Text = "사용자정보를 정상적으로 수정했습니다.";
                         LblResult.Foreground = Brushes.DeepSkyBlue;
+                        LoadData();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Commons.LOGGER.Error($"예외발생 : {ex}");
+                    Commons.LOGGER.Error($"예외발생 BtnUpdate_Click : {ex}");
                 }
 
             }
+        }
+
+        private void GrdData_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            //MessageBox.Show("셀클릭");
+            try
+            {
+                var user = GrdData.SelectedItem as Model.User;
+                TxtUserID.Text = user.UserID.ToString();
+                TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
+                TxtUserSurname.Text = user.UserSurname.ToString();
+                TxtUserName.Text = user.UserName.ToString();
+                TxtUserEmail.Text = user.UserEmail.ToString();
+                CboUserAdmin.SelectedIndex = user.UserAdmin == false ? 0 : 1;
+                CboUserActivated.SelectedIndex = user.UserActivated == false ? 0 : 1;
+            }
+            catch (Exception ex)
+            {
+                Commons.LOGGER.Error($"예외발생 GrdData_SelectedCellsChanged : {ex}");
+            }
+        }
+
+        private void LoadData()
+        {
+            this.DataContext = Logic.DataAccess.GetUsers();
         }
 
         private bool EmailCheck(string email)

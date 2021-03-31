@@ -6,18 +6,22 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using MahApps.Metro.Controls.Dialogs;
 
-namespace WpfSMSApp.View.Account
+namespace WpfSMSApp.View.User
 {
     /// <summary>
     /// MyAccount.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class EditAccount : Page
+    public partial class AddUser : Page
     {
-        public EditAccount()
+        public AddUser()
         {
             InitializeComponent();
         }
+
+
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -38,25 +42,11 @@ namespace WpfSMSApp.View.Account
                 CboUserAdmin.ItemsSource = comboValues;
                 CboUserActivated.ItemsSource = comboValues;
 
-
-
-                var user = Commons.LOGINED_USER;
-                TxtUserID.Text = user.UserID.ToString();
-                TxtUserIdentityNumber.Text = user.UserIdentityNumber.ToString();
-                TxtUserSurname.Text = user.UserSurname.ToString();
-                TxtUserName.Text = user.UserName.ToString();
-                TxtUserEmail.Text = user.UserEmail.ToString();
-                //TxtUserPassword.Password = user.UserPassword;
-                CboUserAdmin.SelectedIndex = user.UserAdmin == false ? 0 : 1;
-                CboUserActivated.SelectedIndex = user.UserActivated == false ? 0 : 1;
-
-
-                //TxtUserAdmin.Text = user.UserAdmin.ToString();
-                //TxtUserActivated.Text = user.UserActivated.ToString();
+                TxtUserID.Text = "";
             }
             catch (Exception ex)
             {
-                Commons.LOGGER.Error($"예외발생 EditAccount Loaded : {ex}");
+                Commons.LOGGER.Error($"예외발생 AddUser Loaded : {ex}");
                 throw ex;
             }
         }
@@ -66,7 +56,7 @@ namespace WpfSMSApp.View.Account
             NavigationService.GoBack();
         }
 
-        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             bool isValid = true; // 입력된 값이 모두 만족하는지 판별하는 플래그
 
@@ -75,8 +65,20 @@ namespace WpfSMSApp.View.Account
                    = LblUserPassword.Visibility = LblUserAdmin.Visibility
                    = LblUserActivated.Visibility = Visibility.Hidden;
 
-            var user = Commons.LOGINED_USER;
+            var user = new Model.User();
 
+            if (string.IsNullOrEmpty(TxtUserIdentityNumber.Text))
+            {
+                LblUserIdentityNumber.Visibility = Visibility.Visible;
+                LblUserIdentityNumber.Text = "사번을 입력하세요";
+                isValid = false;
+            }
+            else if (!IdentityNumberCheck(TxtUserIdentityNumber.Text))
+            {
+                LblUserIdentityNumber.Visibility = Visibility.Visible;
+                LblUserIdentityNumber.Text = "중복된 사번 입니다..";
+                isValid = false;
+            }
             if (string.IsNullOrEmpty(TxtUserSurname.Text))
             {
                 LblUserSurname.Visibility = Visibility.Visible;
@@ -126,10 +128,11 @@ namespace WpfSMSApp.View.Account
                 LblUserActivated.Text = "활성여부를 선택하세요.";
                 isValid = false;
             }
+            
 
             if (isValid)
             {
-                //MessageBox.Show("DB 수정 처리!");
+                user.UserIdentityNumber = TxtUserIdentityNumber.Text;
                 user.UserSurname = TxtUserSurname.Text;
                 user.UserName = TxtUserName.Text;
                 user.UserEmail = TxtUserEmail.Text;
@@ -147,18 +150,17 @@ namespace WpfSMSApp.View.Account
 
                     if(result == 0)
                     {
-                        LblResult.Text = "계정 수정에 수정에 문제가 발생했습니다. 관리자에게 문의 바랍니다.";
+                        LblResult.Text = "사용자 추가에 문제가 발생했습니다. 관리자에게 문의 바랍니다.";
                         LblResult.Foreground = Brushes.Red;
                     }
                     else
                     {
-                        LblResult.Text = "정상적으로 수정했습니다.";
-                        LblResult.Foreground = Brushes.DeepSkyBlue;
+                        NavigationService.GoBack();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Commons.LOGGER.Error($"예외발생 : {ex}");
+                    Commons.LOGGER.Error($"예외발생 AddUser: {ex}");
                 }
 
             }
