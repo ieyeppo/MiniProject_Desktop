@@ -234,6 +234,7 @@
     <Compile Include="Model\Stock.cs">
       <DependentUpon>SMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\StockStore.cs" />
     <Compile Include="Model\Store.cs">
       <DependentUpon>SMSModel.tt</DependentUpon>
     </Compile>
@@ -252,6 +253,15 @@
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Store\AddStore.xaml.cs">
+      <DependentUpon>AddStore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Store\EditStore.xaml.cs">
+      <DependentUpon>EditStore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Store\StoreList.xaml.cs">
+      <DependentUpon>StoreList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\User\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
@@ -261,7 +271,6 @@
     <Compile Include="View\User\EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\User\MetroMessageBox.cs" />
     <Compile Include="View\User\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
@@ -289,6 +298,18 @@
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Store\AddStore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Store\EditStore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Store\StoreList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\User\AddUser.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -331,6 +352,9 @@
     </EntityDeploy>
     <None Include="Model\SMSModel.edmx.diagram">
       <DependentUpon>SMSModel.edmx</DependentUpon>
+    </None>
+    <None Include="NanumGothic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

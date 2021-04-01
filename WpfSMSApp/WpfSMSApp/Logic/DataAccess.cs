@@ -10,13 +10,13 @@ namespace WpfSMSApp.Logic
 {
     public class DataAccess
     {
+        //select * from user와 동일
         public static List<User> GetUsers()
         {
             List<User> users;
 
             using(var ctx = new SMSEntities())
             {
-                //select * from user와 동일
                 users = ctx.User.ToList();
             }
 
@@ -33,6 +33,59 @@ namespace WpfSMSApp.Logic
             using(var ctx = new SMSEntities())
             {
                 ctx.User.AddOrUpdate(user);
+                return ctx.SaveChanges();
+            }
+        }
+
+        //select * from store와 동일
+        internal static List<Store> GetStores()
+        {
+            List<Store> stores;
+
+            using (var ctx = new SMSEntities())
+            {
+                stores = ctx.Store.ToList();
+            }
+
+            return stores;
+        }
+
+        /// <summary>
+        /// 입력, 수정 동시에...
+        /// </summary>
+        /// <param name="store"></param>
+        /// <returns></returns>
+        internal static int SetStore(Store store)
+        {
+            using (var ctx = new SMSEntities())
+            {
+                ctx.Store.AddOrUpdate(store);
+                return ctx.SaveChanges();
+            }
+        }
+
+        internal static List<Stock> GetStocks()
+        {
+            List<Stock> stocks;
+
+            using (var ctx = new SMSEntities())
+            {
+                stocks = ctx.Stock.ToList();
+            }
+
+            return stocks;
+        }
+        
+        /// <summary>
+         /// 입력, 수정 동시에...
+         /// </summary>
+         /// <param name="store"></param>
+         /// <returns></returns>
+        internal static int SetStock(Stock stock)
+        {
+            using (var ctx = new SMSEntities())
+            {
+                ctx.Stock.AddOrUpdate(stock);
                 return ctx.SaveChanges();
             }
         }

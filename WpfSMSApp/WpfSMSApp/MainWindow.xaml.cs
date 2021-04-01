@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using WpfSMSApp.View;
 using WpfSMSApp.View.Account;
+using WpfSMSApp.View.Store;
 using WpfSMSApp.View.User;
 
 namespace WpfSMSApp
@@ -77,6 +78,20 @@ namespace WpfSMSApp
                 //사용자 추가,수정,비활성화,pdf익스포트
                 Commons.LOGGER.Error($"예외발생 BtnUser_Click : {ex}");  
                 await this.ShowMessageAsync("예외", $"예외발생 BtnUser_Click : {ex}");
+            }
+        }
+
+        private void BtnStore_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ActiveControl.Content = new StoreList();
+            }
+            catch (Exception ex)
+            {
+                //사용자 추가,수정,비활성화,pdf익스포트
+                Commons.LOGGER.Error($"예외발생 BtnStore_Click : {ex}");
+                this.ShowMessageAsync("예외", $"예외발생 BtnStore_Click : {ex}");
             }
         }
     }

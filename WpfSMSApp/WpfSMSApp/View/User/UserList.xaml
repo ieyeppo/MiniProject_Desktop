@@ -48,7 +48,7 @@
         <!-- 제목입력 시작 -->
         <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
             <Image Source="/Resources/user_group.png" Width="40" Height="40"/>
-            <Label Content="사용자정보" FontWeight="ExtraBold" FontSize="25" Width="200"/>
+            <Label Content="사용자리스트" FontWeight="ExtraBold" FontSize="25" Width="200"/>
         </StackPanel>
         <!-- 제목입력 끝 -->
 
